@@ -1,35 +1,32 @@
-import React, { useState } from 'react';
-import './App.css';
-import axios from 'axios';
+import React, { useState } from "react";
+import "./App.css";
 
-const Create = () => {
-    const [task, setTask] = useState('');
+const Create = ({ addTodo }) => {
+  const [task, setTask] = useState("");
 
-    const createTask = () => {
-        axios.post('http://localhost:5000/add', { task: task.trim() })
-            .then(result => {
-                console.log(result.data);
-                window.location.reload();
-                setTask('');
-            })
-            .catch(err => console.log(err));
-    };
+  const handleAdd = () => {
+    const trimmed = task.trim();
+    if (!trimmed) return;
 
-    return (
-        <main>
-            <h1>Todo List</h1>
-            <div className='create-form'>
-                <input
-                    type='text'
-                    placeholder='Enter a task'
-                    value={task}
-                    onChange={(e) => setTask(e.target.value)}
-                    required
-                />
-                <button onClick={createTask}>ADD</button>
-            </div>
-        </main>
-    );
+    addTodo(trimmed);
+    setTask("");
+  };
+
+  return (
+    <main>
+      <h1>Todo List</h1>
+      <div className="create-form">
+        <input
+          type="text"
+          placeholder="Enter a task"
+          value={task}
+          onChange={(e) => setTask(e.target.value)}
+          required
+        />
+        <button onClick={handleAdd}>ADD</button>
+      </div>
+    </main>
+  );
 };
 
 export default Create;

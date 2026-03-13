@@ -17,9 +17,9 @@ mongoose.connect(MONGODB_URI,
     console.log('MongoDB connected')
 )
 
-app.listen(PORT,
-    console.log('Server listening on port: 5000')
-)
+app.listen(PORT, () => {
+  console.log(`Server listening on port: ${PORT}`);
+});
 
 app.post('/add', (req, res) => {
   const { task } = req.body;
