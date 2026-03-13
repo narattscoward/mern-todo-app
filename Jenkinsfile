@@ -15,7 +15,9 @@ pipeline {
 
         stage('Containerise') {
             steps {
-                sh 'docker build -t $IMAGE_NAME:latest .'
+                dir('TODO/todo_backend') {
+                    sh 'docker build -t $IMAGE_NAME:latest .'
+                }
             }
         }
 
