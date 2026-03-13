@@ -1,14 +1,28 @@
-FROM node:18
+FROM node:18-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
+# copy backend
+COPY TODO/todo_backend ./backend
+
+# copy frontend
+COPY TODO/todo_frontend ./frontend
+
+# install backend deps
+WORKDIR /app/backend
 RUN npm install
 
-COPY . .
+# build frontend
+WORKDIR /app/frontend
+RUN npm install
+RUN npm run build
 
-ENV PORT=5000
+# move build to backend static folder
+RUN mkdir -p /app/backend/static
+RUN cp -r build /app/backend/static/
+
+WORKDIR /app/backend
 
 EXPOSE 5000
 
-CMD ["node", "server.js"]
+CMD ["npm","start"]
