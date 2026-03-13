@@ -7,6 +7,12 @@ pipeline {
 
     stages {
 
+        stage('Build') {
+            steps {
+                echo "Build stage - dependencies handled in Dockerfile"
+            }
+        }
+
         stage('Containerise') {
             steps {
                 dir('TODO/todo_backend') {
