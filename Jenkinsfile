@@ -7,14 +7,6 @@ pipeline {
 
     stages {
 
-        stage('Build') {
-            steps {
-                dir('TODO/todo_backend') {
-                    sh 'npm install'
-                }
-            }
-        }
-
         stage('Containerise') {
             steps {
                 dir('TODO/todo_backend') {
